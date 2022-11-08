@@ -1,63 +1,46 @@
 function write(string){
     process.stdout.write(string);
 }
+import chalk from 'chalk';
+import boxen from 'boxen';
 
-write('\x1B[1m'); write('hello'); write('\x1B[0m'); write('\n');
+write(chalk.blue.bgGreen('Hello Chalk'))
 
-write('\x1B[2m'); write('hello'); write('\x1B[0m'); write('\n');
 
-write('\x1B[3m'); write('hello'); write('\x1B[0m'); write('\n');
-
-write('\x1B[4m'); write('hello'); write('\x1B[0m'); write('\n');
-
-write('\x1B[5m'); write('hello'); write('\x1B[0m'); write('\n');
-
-write('\x1B[6m'); write('hello'); write('\x1B[0m'); write('\n');
-
-write('\x1B[7m'); write('hello'); write('\x1B[0m'); write('\n');
-
-write('\x1B[8m'); write('hello'); write('\x1B[0m'); write('\n');
-
-write('\x1B[9m'); write('hello'); write('\x1B[0m'); write('\n');
-
-for(let i=30; i<40; i++){
-    if(i==38) continue;
-    // colors
-    write('\x1B[1;'+i+'m'); write('color code number' +i); write('\x1B[0m'); write('\n');
+for(let i=0; i<16; i++){
+    for(let j=0; j<16; j++){
+        let color = (i*j).toString()
+        write(chalk.ansi256(color)(color.padEnd(4,' ')));
+    }
+    write('\n');
 }
 
-for(let i=30; i<40; i++){
-    if(i==38) continue;
-    // colors
-    write('\x1B[2;'+i+'m'); write('color code number' +i); write('\x1B[0m'); write('\n');
-}
+write(boxen(chalk.blue.bgGreen('Hello Chalk'),{
+    padding: 1,
+    margin: 1
+}));
 
-// for(let i=0; i<16; i++){
-//    for (let j=0; j<16; j++);
-//        let color = i*j;
-    // colors
-//    write('\x1B[38;5;'+color+'m'); write(color); write('\x1B[0m');
-//}
+write(boxen(chalk.blue.underline.bold.bgWhite('Hello Chalk'),{
+    padding: 2,
+    margin: 1
+}));
 
-for(let i=40; i<50; i++){
-    if(i==48) continue;
-    // backcolors
-    write('\x1B[1;'+i+'m'); write('color code number' +i); write('\x1B[0m'); write('\n');
-}
+write(boxen(chalk.blue.bold.bgRed('Hello Chalk'),{
+    padding: 1,
+    margin: 1
+})); 
 
-for(let i=40; i<50; i++){
-    if(i==48) continue;
-    // backcolors
-    write('\x1B[2;'+i+'m'); write('color code number' +i); write('\x1B[0m'); write('\n');
-}
+write(boxen(chalk.white.italic.bold('Hello Chalk'),{
+    padding: 1,
+    margin: 1
+}));
 
-console.clear();
-let date = new Date().toString();
-write(date);
-setInterval(()=> {
-    write('\x1B['+ date.length + 'D');
-    date = new Date().toString();
-    write(date);
-},1);
+write(boxen(chalk.white.underline.bgRed('Hello Chalk'),{
+    padding: 1,
+    margin: 1
+}));
 
-
+write(boxen(chalk.blue.bold('Hello Chalk'),{
+    padding: 2,
+    margin: 1
+}));
