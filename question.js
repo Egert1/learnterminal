@@ -7,9 +7,15 @@ inquirer
         {type:'list', name:'gender', message: 'What gender are you?', choices:["male", "female", "NonBinary"]},
         {type:'rawlist', name:'food', message: 'Which food would you choose to eat?', choices:["pizza", "burger", "salad", "noodles", "cheese", "meat"]},
         {type:'expand', name:'feeling', message: 'Are you okay?',key:"y", choices:["yes", "no","maybe"]},
-        {type:'checkbox', name:'like', message: 'Do you like any of these?'},
-        {type:'password', name:'important', message: 'Tell me something important.'},
-        {type:'editor', name:'', message: 'How old are you?'},
+        {type:'checkbox', name:'like', message: 'What are your 2 favourite drinks', choices:["Coca-Cola", "Sprite", "Pepsi", "Kali","Fanta", "Neste", "7Up"],
+          validate: function (answer) {
+            if (answer.length < 2) {
+              return 'You must select at least two drinks.';
+            }
+            return true;
+          }},
+        {type:'password', name:'password1', message: 'Enter your password', validate: requireLetterAndNumber},
+        {type:'editor', name:'review', message: 'How did you like your meal?', default: '//Start typing your review here'}
     ])
     .then((answer)=>{
         console.log(`I am ${answer.age} years old`); 
@@ -17,8 +23,8 @@ inquirer
         console.log(`${answer.ask}, I have a phone`);
         console.log(`I am ${answer.gender}`);
         console.log(`I like ${answer.food}`);
-        console.log(`${answer.feeling}`);
-        console.log(`Yes, I like ${answer.like}`);
-        console.log(`${answer.important}`);
-        console.log(`I have ${answer.eyes} eyes`);
+        console.log(answer.feeling);
+        console.log(`I will take the ${answer.like}`);
+        console.log(answer.password1);
+        console.log(answer.review);
     })
